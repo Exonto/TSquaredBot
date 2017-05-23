@@ -5,13 +5,12 @@ module.exports.loop = function() {
 
 	var spawns = Game.spawns;
 	var creeps = Game.creeps;
-	var source;
 
 	for (var name in creeps)
 	{
 		var creep = creeps[name];
 		var spawn = spawns['Spawn1'];
-		source = creep.room.find(FIND_SOURCES)[Math.floor(totalCreeps / 4)];
+		var source = creep.room.find(FIND_SOURCES)[Math.floor(totalCreeps / 4)];
 
 		if (_.sum(creep.carry) < creep.carryCapacity)
 		{
