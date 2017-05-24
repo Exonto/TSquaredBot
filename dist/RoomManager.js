@@ -2,12 +2,12 @@
 /**
  * Room manager constructor.
  */
-var RoomManager = function()
+function RoomManager()
 {
 	this.allRooms = [];
 	this.ownedRooms = [];
 	this.unownedRooms = [];
-};
+}
 
 /**
  * Resets all previous data being stored.

@@ -1,8 +1,7 @@
 var RoomManager = require('RoomManager');
+var Roles = require('RoleType');
 
 var roomManager = new RoomManager();
-
-var totalCreeps = 0;
 
 module.exports.loop = function() {
 
@@ -11,8 +10,11 @@ module.exports.loop = function() {
 	var spawns = Game.spawns;
 	var creeps = Game.creeps;
 
+	var totalCreeps = 0;
 	for (var name in creeps)
 	{
+		++totalCreeps;
+
 		var creep = creeps[name];
 		var spawn = spawns['Spawn1'];
 		var source = creep.room.find(FIND_SOURCES)[Math.floor(totalCreeps / 4)];
@@ -41,7 +43,6 @@ module.exports.loop = function() {
 		// max carryCapacity
 		if (spawner.energy >= spawner.energyCapacity * .80)
 		{
-			++totalCreeps;
 			spawner.createCreep([WORK,CARRY,MOVE,MOVE], 'Harvester' + totalCreeps);
 		}
 	}
