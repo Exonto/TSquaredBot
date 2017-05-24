@@ -1,7 +1,12 @@
+var RoomManager = require('RoomManager');
+
+var roomManager = new RoomManager();
 
 var totalCreeps = 0;
 
 module.exports.loop = function() {
+
+	roomManager.update(Game.rooms);
 
 	var spawns = Game.spawns;
 	var creeps = Game.creeps;
@@ -34,7 +39,7 @@ module.exports.loop = function() {
 
 		// The spawn will create new creeps if its energy exceeds 75% of its
 		// max carryCapacity
-		if (spawner.energy >= spawner.energyCapacity * .75)
+		if (spawner.energy >= spawner.energyCapacity * .80)
 		{
 			++totalCreeps;
 			spawner.createCreep([WORK,CARRY,MOVE,MOVE], 'Harvester' + totalCreeps);
