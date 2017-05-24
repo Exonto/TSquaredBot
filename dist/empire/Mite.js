@@ -1,10 +1,10 @@
 var RoleManager = require('RoleManager');
 
-function Mite() = 
+function Mite()
 {
-  this.availableRoles = [];
-  this.activeRole;
   this.roleManager = new RoleManager(this);
+  this.availableRoles = [];
+  this.activeRole = undefined;
 }
 
 module.exports = Mite;

@@ -1,9 +1,10 @@
 var RoomManager = require('RoomManager');
-var Roles = require('RoleType');
+var RoleType = require('RoleType');
+var RoleHarvester = require('RoleHarvester');
 
 var roomManager = new RoomManager();
 
-module.exports.loop = function() 
+module.exports.loop = function()
 {
 	roomManager.update(Game.rooms);
 
