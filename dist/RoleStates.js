@@ -1,6 +1,7 @@
 
-var RoleStates = {
-	
+var RoleStates =
+{
+
 };
 
 module.exports = RoleStates;

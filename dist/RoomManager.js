@@ -23,7 +23,8 @@ RoomManager.prototype._reset = function()
  * This will update all room data and cache it.
  * @param  {object<string,Rooms>} rooms The rooms to be considered in the update.
  */
-RoomManager.prototype.update = function(rooms) {
+RoomManager.prototype.update = function(rooms)
+{
 
 	// Reset all previous data now being updated
 	this._reset();
