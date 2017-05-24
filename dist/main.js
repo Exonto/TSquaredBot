@@ -3,8 +3,8 @@ var Roles = require('RoleType');
 
 var roomManager = new RoomManager();
 
-module.exports.loop = function() {
-
+module.exports.loop = function() 
+{
 	roomManager.update(Game.rooms);
 
 	var spawns = Game.spawns;

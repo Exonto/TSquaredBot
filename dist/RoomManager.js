@@ -25,7 +25,6 @@ RoomManager.prototype._reset = function()
  */
 RoomManager.prototype.update = function(rooms)
 {
-
 	// Reset all previous data now being updated
 	this._reset();
 
