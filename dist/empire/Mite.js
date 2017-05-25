@@ -17,7 +17,7 @@ Mite.prototype.update = function()
 
 Mite.prototype.toString = function()
 {
-	return '[Name:' + this.creep.name + ', ActiveRole:' + this.activeRole + ']';
+	return '[Name: ' + this.creep.name + ', ActiveRole: ' + this.activeRole + ']';
 };
 
 module.exports = Mite;
