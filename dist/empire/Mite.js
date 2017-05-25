@@ -1,11 +1,12 @@
 var RoleManager = require('RoleManager');
 
-var Mite = function(creep, availableRoles)
+var Mite = function(colony, creep, availableRoles)
 {
+  this.colony = colony
 	this.creep = creep;
-  this.roleManager = new RoleManager(this);
   this.availableRoles = availableRoles;
   this.activeRole = undefined;
+  this.roleManager = new RoleManager(this);
 };
 
 Mite.prototype.update = function()
