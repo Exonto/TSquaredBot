@@ -12,11 +12,18 @@ var RoleState = require('RoleState');
  * @param {RoleType} [type=RoleType.UNDEFINED] The role's unique ID
  */
 
-var Role = function(type = RoleType.UNDEFINED)
+var Role = function(type = RoleType.UNDEFINED, states = [], activeState = undefined)
 {
 	this.type = type;
+	this.states = states;
+	this.activeState = activeState;
 };
 
-Role.prototype.execute = function(state) { };
+Role.prototype.toString = function()
+{
+	return '[RoleType:' + this.type + ', ActiveState:' + this.activeState + ']';
+};
+
+Role.prototype.execute = function(state = undefined) { console.log('ERROR: The base class \'Role\' should not be executing.') };
 
 module.exports = Role;
