@@ -18,7 +18,7 @@ RoleManager.prototype.evaluate = function()
 	}
 	else  // > or < 1
 	{
-		// Make smart decision
+		// TODO: Make smart decision
 		// * look at mite's colony's priorities
 		// * look at mite's situation
 	}
