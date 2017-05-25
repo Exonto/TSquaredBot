@@ -6,8 +6,6 @@ var Mite = require('Mite');
 
 var roomManager = new RoomManager();
 
-Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE], 'Bug');
-
 module.exports.loop = function()
 {
 	roomManager.update(Game.rooms);

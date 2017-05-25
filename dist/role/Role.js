@@ -17,6 +17,8 @@ var Role = function(type = RoleType.UNDEFINED, states = [], activeState = undefi
 	this.type = type;
 	this.states = states;
 	this.activeState = activeState;
+
+	this.priority = 0;
 };
 
 Role.prototype.toString = function()
@@ -24,6 +26,9 @@ Role.prototype.toString = function()
 	return '[RoleType:' + this.type + ', ActiveState:' + this.activeState + ']';
 };
 
-Role.prototype.execute = function(state = undefined) { console.log('ERROR: The base class \'Role\' should not be executing.') };
+Role.prototype.execute = function(state = undefined)
+{
+	console.log('ERROR: The base class \'Role\' should not be executing.'); 
+};
 
 module.exports = Role;

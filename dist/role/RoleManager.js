@@ -2,10 +2,10 @@ var RoleType = require('RoleType');
 var Role = require('Role');
 var RoleHarvester = require('RoleHarvester');
 
-function RoleManager(mite)
+var RoleManager = function(mite)
 {
   this.mite = mite;
-}
+};
 
 RoleManager.prototype.evaluate = function()
 {

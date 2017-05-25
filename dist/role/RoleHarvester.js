@@ -14,10 +14,9 @@ RoleHarvester.prototype.constructor = RoleHarvester;
 
 RoleHarvester.prototype.execute = function(state = undefined)
 {
-	console.log('woooo');
 	if (state !== undefined)
 	{
-
+		this.activeState = state;
 	}
 	else
 	{

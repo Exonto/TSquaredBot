@@ -2,7 +2,7 @@
 /**
  * Room manager constructor.
  */
-function RoomManager()
+var RoomManage = function()
 {
 	this.allRooms = [];
 	this.ownedRooms = [];
