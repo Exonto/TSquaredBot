@@ -9,17 +9,18 @@ var RoleManager = function(mite)
 
 RoleManager.prototype.evaluate = function()
 {
-	var totalRoles = this.mite.availableRoles.length;
-
-	var activeRole = this.mite.activeRole;
 	var nextRole;
-	if (totalRoles === 1)
+	var roles = this.mite.availableRoles;
+
+	if (roles.length == 1)  // only choice
 	{
-		nextRole = this.mite.availableRoles[0];
+		nextRole = roles[0]
 	}
-	else if (this.mite.availableRoles.length > 1)
+	else  // > or < 1
 	{
-		var roles = this.mite.availableRoles;
+		// Make smart decision
+		// * look at mite's colony's priorities
+		// * look at mite's situation
 	}
 
   return nextRole;
