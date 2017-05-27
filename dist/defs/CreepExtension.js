@@ -41,7 +41,7 @@ Creep.prototype.update = function()
   }
 
   this.activeRole = this.resolveDominantRole();
-  this.activeRole.execute();
+  this.activeRole.execute(this.activeRole.resolveState());
 
   return this.activeRole;
 };
@@ -53,6 +53,7 @@ Creep.prototype.resolveDominantRole = function()
   {
     var role = this.availableRoles[roleIdx];
     var priority = role.resolvePriority();
+    console.log('priority: ' + priority);
     if (dominantRole === undefined || priority > dominantRole)
     {
       dominantRole = role;

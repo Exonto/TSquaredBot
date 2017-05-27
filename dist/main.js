@@ -20,4 +20,6 @@ module.exports.loop = function()
 
     creep.update();
   }
+
+  console.log(Game.cpu.getUsed());
 };
