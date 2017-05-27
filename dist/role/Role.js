@@ -39,7 +39,7 @@ Role.prototype.execute = function(state = undefined) { };
 
 Role.prototype.toString = function()
 {
-  return '[RoleType:' + this.type + ', ActiveState:' + this.activeState + ']';
+  return '[RoleType: ' + this.type + ', ActiveState: ' + this.activeState + ']';
 };
 
 module.exports = Role;

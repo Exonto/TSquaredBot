@@ -15,9 +15,9 @@ RoleHarvester.prototype = Object.create(Role.prototype);
 // Sets the prototype constructor to the function
 RoleHarvester.prototype.constructor = RoleHarvester;
 
-Role.prototype.resolvePriority = function()
+RoleHarvester.prototype.resolvePriority = function()
 {
-  
+
 };
 
 RoleHarvester.prototype.execute = function(state = undefined)

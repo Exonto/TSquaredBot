@@ -2,46 +2,22 @@ var RoleType = require('RoleType');
 var Role = require('Role');
 var RoleHarvester = require('RoleHarvester');
 var CreepExtension = require('CreepExtension');
+var Priority = require('Priority');
 
+if (Game.creeps.length === 0)
+{
+  Game.spawns['Spawn1'].createCreep([WORK, WORK, CARRY, MOVE], 'Bug');
+}
 module.exports.loop = function()
 {
-  var spawns = Game.spawns;
-  var creeps = Game.creeps;
-
-  var totalCreeps = 0;
-  for (var name in creeps)
+  for (var name in Game.creeps)
   {
-    ++totalCreeps;
-
-    var creep = creeps[name];
-    var spawn = spawns['Spawn1'];
-    var source = creep.room.find(FIND_SOURCES)[Math.floor(totalCreeps / 4)];
-
-    if (_.sum(creep.carry) < creep.carryCapacity)
+    var creep = Game.creeps[name];
+    if (creep._initialized === false)
     {
-      if (creep.harvest(source) == ERR_NOT_IN_RANGE)
-      {
-        creep.moveTo(source);
-      }
+      creep.initialize(undefined, [new RoleHarvester(creep, Priority.PRIMARY)]);
     }
-    else
-    {
-      if (creep.transfer(spawn, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)
-      {
-        creep.moveTo(spawn);
-      }
-    }
-  }
 
-  for (var spawnName in spawns)
-  {
-    var spawner = spawns[spawnName];
-
-    // The spawn will create new creeps if its energy exceeds 75% of its
-    // max carryCapacity
-    if (spawner.energy >= spawner.energyCapacity * .80)
-    {
-      spawner.createCreep([WORK,CARRY,MOVE,MOVE], 'Harvester' + totalCreeps);
-    }
+    creep.update();
   }
 };
