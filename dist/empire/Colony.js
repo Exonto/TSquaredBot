@@ -1,11 +1,11 @@
-var Colony = function(empire, id, room, mites) =
+var Colony = function(empire, id, room, mites)
 {
-  this.empire = empire
-  this.id = id
-  this.room = room
-  this.controller = room.controller
-  this.spawners = []
-  this.mites = mites
+  this.empire = empire;
+  this.id = id;
+  this.room = room;
+  this.controller = room.controller;
+  this.spawners = [];
+  this.mites = mites;
 };
 
 Colony.prototype.update = function()
@@ -16,7 +16,7 @@ Colony.prototype.update = function()
     // TODO: hard coded!
     if (spawn.canCreateCreep([WORK,CARRY,MOVE], this.id + "Harvester") == OK)
     {
-      spawn.createCreep([WORK,CARRY,MOVE], this.id + "Harvester")
+      spawn.createCreep([WORK,CARRY,MOVE], this.id + "Harvester");
     }
   }
 };
