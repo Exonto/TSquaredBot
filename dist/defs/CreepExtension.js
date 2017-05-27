@@ -34,6 +34,11 @@ Creep.prototype.update = function()
 {
   // Do nothing if still spawning
   if (this.spawning) return;
+  if (this.availableRoles === undefined || this.availableRoles.length === 0)
+  {
+    console.log('ERROR: This creep has no available roles to choose from. Creep: ' + this.creep);
+    return;
+  }
 
   this.activeRole = this.resolveDominantRole();
   this.activeRole.execute();
@@ -43,7 +48,17 @@ Creep.prototype.update = function()
 
 Creep.prototype.resolveDominantRole = function()
 {
-  return undefined;
+  var dominantRole;
+  for (var role in this.availableRoles)
+  {
+    var priority = role.resolvePriority();
+    if (dominantRole === undefined || priority > dominantRole)
+    {
+      dominantRole = role;
+    }
+  }
+
+  return dominantRole;
 };
 
 Creep.prototype.toString = function()

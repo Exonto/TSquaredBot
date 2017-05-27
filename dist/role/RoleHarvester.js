@@ -17,7 +17,7 @@ RoleHarvester.prototype.constructor = RoleHarvester;
 
 Role.prototype.resolvePriority = function()
 {
-
+  
 };
 
 RoleHarvester.prototype.execute = function(state = undefined)
