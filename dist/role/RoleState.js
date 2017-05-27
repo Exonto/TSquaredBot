@@ -1,10 +1,10 @@
 
 var RoleState =
 {
-	MOVING : function(target)
-	{
-		
-	}
+  MOVING : function(target)
+  {
+
+  }
 };
 
 module.exports = RoleState;

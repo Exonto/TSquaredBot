@@ -3,8 +3,8 @@ var RoleType = require('RoleType');
 
 var RoleHarvester = function()
 {
-	// Inherits all of Role's properties
-	Role.call(this, RoleType.HARVESTER);
+  // Inherits all of Role's properties
+  Role.call(this, RoleType.HARVESTER);
 };
 
 // Inherits all of Role's prototype functions
@@ -14,14 +14,14 @@ RoleHarvester.prototype.constructor = RoleHarvester;
 
 RoleHarvester.prototype.execute = function(state = undefined)
 {
-	if (state !== undefined)
-	{
-		this.activeState = state;
-	}
-	else
-	{
-		// Continue with same state
-	}
+  if (state !== undefined)
+  {
+    this.activeState = state;
+  }
+  else
+  {
+    // Continue with same state
+  }
 };
 
 module.exports = RoleHarvester;

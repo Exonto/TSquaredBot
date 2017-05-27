@@ -17,12 +17,12 @@ Creep.prototype.activeRole = undefined;
  */
 Creep.prototype.initialize = function(colony, availableRoles)
 {
-	if (this._initialized) console.log('ERROR: Cannot initialize an already initialized creep.');
+  if (this._initialized) console.log('ERROR: Cannot initialize an already initialized creep.');
 
-	this.colony = colony;
-	this.availableRoles = availableRoles;
+  this.colony = colony;
+  this.availableRoles = availableRoles;
 
-	this._initialized = true;
+  this._initialized = true;
 };
 
 /**
@@ -32,21 +32,21 @@ Creep.prototype.initialize = function(colony, availableRoles)
  */
 Creep.prototype.update = function()
 {
-	// Do nothing if still spawning
-	if (this.spawning) return;
+  // Do nothing if still spawning
+  if (this.spawning) return;
 
-	this.activeRole = this.resolveDominantRole();
-	this.activeRole.execute();
+  this.activeRole = this.resolveDominantRole();
+  this.activeRole.execute();
 
-	return this.activeRole;
+  return this.activeRole;
 };
 
 Creep.prototype.resolveDominantRole = function()
 {
-	return undefined;
+  return undefined;
 };
 
 Creep.prototype.toString = function()
 {
-	return '[Name: ' + this.name + ', ActiveRole: ' + this.activeRole + ']';
+  return '[Name: ' + this.name + ', ActiveRole: ' + this.activeRole + ']';
 };

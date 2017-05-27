@@ -5,43 +5,43 @@ var CreepExtension = require('CreepExtension');
 
 module.exports.loop = function()
 {
-	var spawns = Game.spawns;
-	var creeps = Game.creeps;
+  var spawns = Game.spawns;
+  var creeps = Game.creeps;
 
-	var totalCreeps = 0;
-	for (var name in creeps)
-	{
-		++totalCreeps;
+  var totalCreeps = 0;
+  for (var name in creeps)
+  {
+    ++totalCreeps;
 
-		var creep = creeps[name];
-		var spawn = spawns['Spawn1'];
-		var source = creep.room.find(FIND_SOURCES)[Math.floor(totalCreeps / 4)];
+    var creep = creeps[name];
+    var spawn = spawns['Spawn1'];
+    var source = creep.room.find(FIND_SOURCES)[Math.floor(totalCreeps / 4)];
 
-		if (_.sum(creep.carry) < creep.carryCapacity)
-		{
-			if (creep.harvest(source) == ERR_NOT_IN_RANGE)
-			{
-				creep.moveTo(source);
-			}
-		}
-		else
-		{
-			if (creep.transfer(spawn, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)
-			{
-				creep.moveTo(spawn);
-			}
-		}
-	}
+    if (_.sum(creep.carry) < creep.carryCapacity)
+    {
+      if (creep.harvest(source) == ERR_NOT_IN_RANGE)
+      {
+        creep.moveTo(source);
+      }
+    }
+    else
+    {
+      if (creep.transfer(spawn, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)
+      {
+        creep.moveTo(spawn);
+      }
+    }
+  }
 
-	for (var spawnName in spawns)
-	{
-		var spawner = spawns[spawnName];
+  for (var spawnName in spawns)
+  {
+    var spawner = spawns[spawnName];
 
-		// The spawn will create new creeps if its energy exceeds 75% of its
-		// max carryCapacity
-		if (spawner.energy >= spawner.energyCapacity * .80)
-		{
-			spawner.createCreep([WORK,CARRY,MOVE,MOVE], 'Harvester' + totalCreeps);
-		}
-	}
+    // The spawn will create new creeps if its energy exceeds 75% of its
+    // max carryCapacity
+    if (spawner.energy >= spawner.energyCapacity * .80)
+    {
+      spawner.createCreep([WORK,CARRY,MOVE,MOVE], 'Harvester' + totalCreeps);
+    }
+  }
 };

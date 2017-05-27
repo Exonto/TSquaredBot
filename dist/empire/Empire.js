@@ -1,4 +1,4 @@
-function Empire() = 
+function Empire()
 {
 
 };
