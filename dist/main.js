@@ -1,15 +1,10 @@
-var RoomManager = require('RoomManager');
 var RoleType = require('RoleType');
 var Role = require('Role');
 var RoleHarvester = require('RoleHarvester');
-var Mite = require('Mite');
-
-var roomManager = new RoomManager();
+var CreepExtension = require('CreepExtension');
 
 module.exports.loop = function()
 {
-	roomManager.update(Game.rooms);
-
 	var spawns = Game.spawns;
 	var creeps = Game.creeps;
 
