@@ -1,5 +1,6 @@
 var RoleType = require('RoleType');
 var RoleState = require('RoleState');
+var Priority = require('Priority');
 
 /**
  * A role defines a set list of actions (aka RoleStates) which a mite may perform.
@@ -11,24 +12,34 @@ var RoleState = require('RoleState');
  * its ultimate goal, whatever that may be.
  * @param {RoleType} [type=RoleType.UNDEFINED] The role's unique ID
  */
-
-var Role = function(type = RoleType.UNDEFINED, states = [], activeState = undefined)
+var Role = function(creep, type = RoleType.UNDEFINED, states = [], activeState = undefined)
 {
+  this.creep = creep;
   this.type = type;
   this.states = states;
   this.activeState = activeState;
 
-  this.priority = 0;
+  // Each creep assigns its roles a base priority level which is used to
+  // differentiate one role from another in terms of their importance.
+  this.basePriority = Priority.NONE;
 };
+
+/**
+ * This determines how important this role thinks it is given its creep's
+ * current context.
+ *
+ * This priority level is represented by a floating point value betwen negative
+ * and positive infinity. Whichever role resolves itself as having the highest
+ * priority will be chosen as the creep's active role.
+ * @return number The floating point value representing the role's current priority level
+ */
+Role.prototype.resolvePriority = function() { };
+
+Role.prototype.execute = function(state = undefined) { };
 
 Role.prototype.toString = function()
 {
   return '[RoleType:' + this.type + ', ActiveState:' + this.activeState + ']';
-};
-
-Role.prototype.execute = function(state = undefined)
-{
-  console.log('ERROR: The base class \'Role\' should not be executing.');
 };
 
 module.exports = Role;
