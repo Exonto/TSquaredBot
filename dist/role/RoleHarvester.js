@@ -32,15 +32,15 @@ RoleHarvester.prototype.resolvePriority = function()
  */
 RoleHarvester.prototype.resolveState = function()
 {
-  var resolvedState;
-  var stateType = this.activeState.type;
+  var resolvedState = this.activeState;
   if (this.activeState.isCompleted())
   {
-    if (stateType === StateType.MOVING.SOURCE)
+    var stateType = this.activeState.type;
+    if (stateType === StateType.MOVING.RESOURCE)
     {
       resolvedState = new StateHarvest(this.creep, this, this.activeState.source);
     }
-    else if (stateType === StateType.BUILDING.SPAWN)
+    else if (stateType === StateType.BUILDING.STRUCTURE.SPAWN)
     {
       resolvedState = new StateTransfer(this.creep, this, this.activeState.spawn);
     }
@@ -49,7 +49,7 @@ RoleHarvester.prototype.resolveState = function()
       var resolvedSpawn = this.resolveSpawn();
       resolvedState = new StateMove(this.creep, this, this.activeState, resolvedSpawn);
     }
-    else if (stateType === StateType.TRANSFERING || stateType === StateType.UNDEFINED)
+    else if (stateType === StateType.TRANSFERRING || stateType === StateType.NONE)
     {
       var closestEnergySource = this.creep.room.find(FIND_SOURCES)[0];
       resolvedState = new StateMove(this.creep, this, closestEnergySource);
