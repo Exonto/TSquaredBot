@@ -7,8 +7,8 @@ var StateHarvest = function(creep, role, target)
   this.target = target;
 };
 
-RoleHarvester.prototype = Object.create(Role.prototype);
-RoleHarvester.prototype.constructor = RoleHarvester;
+StateHarvest.prototype = Object.create(State.prototype);
+StateHarvest.prototype.constructor = StateHarvest;
 
 StateHarvest.prototype.execute = function()
 {
@@ -30,4 +30,4 @@ StateHarvest.prototype.resolveType = function()
 
 };
 
-module.exports = RoleHarvester;
+module.exports = StateHarvest;
