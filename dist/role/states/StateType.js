@@ -2,16 +2,25 @@ var StateType =
 {
   MOVING : 
   {
+    ROOM_POSITION : 1.01,
     STRUCTURE : 
     {
-      CONTAINER  : 1.0101,
-      CONTROLLER : 1.0102,
-      EXTENSION  : 1.0103,
-      EXTRACTOR  : 1.0104,
-      KEEPERLAIR : 1.0105,
-      SPAWN      : 1.0115
+      CONTAINER  : 1.0201,
+      CONTROLLER : 1.0202,
+      EXTENSION  : 1.0203,
+      EXTRACTOR  : 1.0204,
+      KEEPERLAIR : 1.0205,
+      SPAWN      : 1.0215
     },
-    ROOM_POSITION : 1.02
+    RESOURCE : 
+    {
+      ENERGY  : 1.0301,
+      POWER   : 1.0302,
+      MINERAL : 
+      {
+        HYDROGEN : 1.030301
+      }
+    }
   },
   HARVESTING : 
   {
