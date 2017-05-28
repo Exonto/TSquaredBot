@@ -20,7 +20,7 @@ StateTransfer.prototype.execute = function()
  */
 StateTransfer.prototype.isComplete = function()
 {
-  return this.getCarrySum() <= 0;
+  return this.creep.getCarrySum() <= 0;
 };
 
 StateTransfer.prototype.resolveType = function()

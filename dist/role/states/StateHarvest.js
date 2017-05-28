@@ -2,7 +2,7 @@ var State = require('State');
 
 var StateHarvest = function(creep, role, target)
 {
-  State.call(this, StateType.HARVEST, creep, role);
+  State.call(this, StateType.HARVESTING, creep, role);
 
   this.target = target;
 };
@@ -12,9 +12,7 @@ StateHarvest.prototype.constructor = StateHarvest;
 
 StateHarvest.prototype.execute = function()
 {
-  var exitCode = this.creep.harvest(this.source);
-
-  return exitCode;
+  return this.creep.harvest(this.target);
 };
 
 /**
@@ -22,7 +20,7 @@ StateHarvest.prototype.execute = function()
  */
 StateHarvest.prototype.isComplete = function()
 {
-  return this.getCarrySum() >= this.carryCapacity;
+  return this.creep.getCarrySum() >= this.creep.carryCapacity;
 };
 
 StateHarvest.prototype.resolveType = function()
