@@ -63,6 +63,11 @@ Creep.prototype.resolveDominantRole = function()
   return dominantRole;
 };
 
+Creep.prototype.getCarrySum = function()
+{
+  return _.sum(this.carry);
+};
+
 Creep.prototype.toString = function()
 {
   return '[Name: ' + this.name + ', ActiveRole: ' + this.activeRole + ']';
