@@ -1,5 +1,6 @@
 var StateType =
 {
+  NONE : 0,
   MOVING : 
   {
     ROOM_POSITION : 1.01,
@@ -34,28 +35,38 @@ var StateType =
       }
     }
   },
-  BUILDING : 
+  TRANSFERRING :
   {
+    CREEP : 3.01,
     STRUCTURE : 
     {
-      CONTAINER  : 3.0101,
-      CONTROLLER : 3.0102,
-      EXTENSION  : 3.0103,
-      EXTRACTOR  : 3.0104,
-      KEEPERLAIR : 3.0105,
-      SPAWN      : 3.0115
+      CONTAINER  : 3.0201,
+      CONTROLLER : 3.0202,
+      EXTENSION  : 3.0203,
+      EXTRACTOR  : 3.0204,
+      KEEPERLAIR : 3.0205,
+      SPAWN      : 3.0215
     }
+  },
+  BUILDING : 
+  {
+    CONTAINER  : 4.01,
+    CONTROLLER : 4.02,
+    EXTENSION  : 4.03,
+    EXTRACTOR  : 4.04,
+    KEEPERLAIR : 4.05,
+    SPAWN      : 4.15
   },
   ATTACKING : 
   {
-    CREEP : 4.01,
+    CREEP : 5.01,
     STRUCTURE : {
-      CONTAINER  : 4.0201,
-      CONTROLLER : 4.0202,
-      EXTENSION  : 4.0203,
-      EXTRACTOR  : 4.0204,
-      KEEPERLAIR : 4.0205,
-      SPAWN      : 4.0215
+      CONTAINER  : 5.0201,
+      CONTROLLER : 5.0202,
+      EXTENSION  : 5.0203,
+      EXTRACTOR  : 5.0204,
+      KEEPERLAIR : 5.0205,
+      SPAWN      : 5.0215
     }
   }
 };
