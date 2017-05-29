@@ -93,4 +93,16 @@ RoleHarvester.prototype.execute = function(state = undefined)
   this.activeState.execute();
 };
 
+RoleHarvester.prototype.serialize = function()
+{
+  var properties = Role.prototype.serialize.call(this);
+
+  return properties;
+};
+
+RoleHarvester.prototype.deserialize = function(properties)
+{
+  Role.prototype.deserialize.call(this, properties);
+};
+
 module.exports = RoleHarvester;

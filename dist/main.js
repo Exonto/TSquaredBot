@@ -3,6 +3,7 @@ var Role = require('Role');
 var RoleHarvester = require('RoleHarvester');
 var CreepExtension = require('CreepExtension');
 var Priority = require('Priority');
+var MemoryManager = require('MemoryManager');
 
 if (Game.creeps.length === 0)
 {
@@ -13,11 +14,20 @@ module.exports.loop = function()
   for (var name in Game.creeps)
   {
     var creep = Game.creeps[name];
-    if (test === false)
+    if (creep.spawning === false)
     {
-      creep.initialize(undefined, [new RoleHarvester(creep, Priority.PRIMARY)]);
-    }
+      if (Memory.creeps[creep.name] !== undefined)
+      {
+        MemoryManager.initializeCreep(creep);
+      }
+      else
+      {
+        creep.initialize(undefined, new RoleHarvester(creep, Priority.PRIMARY), [new RoleHarvester(creep, Priority.PRIMARY)]);
+      }
 
-    creep.update();
+      creep.update();
+
+      MemoryManager.saveCreep(creep);
+    }
   }
 };

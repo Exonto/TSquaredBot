@@ -39,6 +39,21 @@ Role.prototype.resolvePriority = function() { };
 
 Role.prototype.execute = function(state = undefined) { };
 
+Role.prototype.serialize = function()
+{
+  var properties = [];
+  properties[0] = this.type;
+  properties[1] = this.basePriority;
+
+  return properties;
+};
+
+Role.prototype.deserialize = function(properties)
+{
+  this.type = properties[0];
+  this.basePriority = properties[1];
+};
+
 Role.prototype.toString = function()
 {
   return '[RoleType: ' + Object.keys(RoleType)[this.type] + ', ActiveState: ' + this.activeState + ']';

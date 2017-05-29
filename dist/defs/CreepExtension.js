@@ -11,15 +11,17 @@ Creep.prototype.activeRole = undefined;
 
 /**
  * This will initialize any added properties which should be defined.
- * It should only be called once immediately after having been set to spawn.
+ * It should only be called once per tick by the MemoryManager.
  * @param  {Colony} colony         This defines the Colony or 'room' this creep currently belongs to
+ * @param  {Role} activeRole       This defines the creep's current role
  * @param  {Role[]} availableRoles These are the all the different roles the creep may employ.
  */
-Creep.prototype.initialize = function(colony, availableRoles)
+Creep.prototype.initialize = function(colony, activeRole, availableRoles)
 {
   if (this._initialized) console.log('ERROR: Cannot initialize an already initialized creep.');
 
   this.colony = colony;
+  this.activeRole = activeRole;
   this.availableRoles = availableRoles;
 
   this._initialized = true;
@@ -41,7 +43,7 @@ Creep.prototype.update = function()
   }
 
   this.activeRole = this.resolveDominantRole();
-  this.activeRole.execute(this.activeRole.resolveState());
+  //this.activeRole.execute(this.activeRole.resolveState());
 
   return this.activeRole;
 };
