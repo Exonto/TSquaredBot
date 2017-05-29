@@ -16,7 +16,7 @@ Creep.prototype.activeRole = undefined;
  * @param  {Role} activeRole       This defines the creep's current role
  * @param  {Role[]} availableRoles These are the all the different roles the creep may employ.
  */
-Creep.prototype.initialize = function(colony, activeRole, availableRoles)
+Creep.prototype.initialize = function(colony, availableRoles, activeRole = undefined)
 {
   if (this._initialized) console.log('ERROR: Cannot initialize an already initialized creep.');
 
@@ -43,6 +43,7 @@ Creep.prototype.update = function()
   }
 
   this.activeRole = this.resolveDominantRole();
+  this.activeRole.basePriority--;
   //this.activeRole.execute(this.activeRole.resolveState());
 
   return this.activeRole;

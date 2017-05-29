@@ -1,5 +1,4 @@
 var RoleType = require('RoleType');
-var RoleState = require('RoleState');
 var Priority = require('Priority');
 var StateType = require('StateType');
 var StateNone = require('StateNone');
@@ -42,21 +41,27 @@ Role.prototype.execute = function(state = undefined) { };
 Role.prototype.serialize = function()
 {
   var properties = [];
-  properties[0] = this.type;
-  properties[1] = this.basePriority;
+  var idx = 0;
+
+  properties[idx++] = this.type;
+  properties[idx++] = this.basePriority;
 
   return properties;
 };
 
 Role.prototype.deserialize = function(properties)
 {
-  this.type = properties[0];
-  this.basePriority = properties[1];
+  var idx = 0;
+
+  this.type = properties[idx++];
+  this.basePriority = properties[idx++];
+
+  return idx;
 };
 
 Role.prototype.toString = function()
 {
-  return '[RoleType: ' + Object.keys(RoleType)[this.type] + ', ActiveState: ' + this.activeState + ']';
+  return '[RoleType: ' + Object.keys(RoleType)[this.type] + ', BasePriority: ' + this.basePriority + ', ActiveState: ' + this.activeState + ']';
 };
 
 module.exports = Role;

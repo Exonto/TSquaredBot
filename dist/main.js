@@ -16,13 +16,14 @@ module.exports.loop = function()
     var creep = Game.creeps[name];
     if (creep.spawning === false)
     {
-      if (Memory.creeps[creep.name] !== undefined)
+      if (MemoryManager.creepExists(creep))
       {
         MemoryManager.initializeCreep(creep);
       }
       else
       {
-        creep.initialize(undefined, new RoleHarvester(creep, Priority.PRIMARY), [new RoleHarvester(creep, Priority.PRIMARY)]);
+        creep.initialize(undefined, [new RoleHarvester(creep, Priority.PRIMARY)]);
+        console.log('First Init');
       }
 
       creep.update();

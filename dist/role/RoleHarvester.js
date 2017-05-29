@@ -96,13 +96,14 @@ RoleHarvester.prototype.execute = function(state = undefined)
 RoleHarvester.prototype.serialize = function()
 {
   var properties = Role.prototype.serialize.call(this);
+  var idx = properties.length;
 
   return properties;
 };
 
 RoleHarvester.prototype.deserialize = function(properties)
 {
-  Role.prototype.deserialize.call(this, properties);
+  var idx = Role.prototype.deserialize.call(this, properties);
 };
 
 module.exports = RoleHarvester;
