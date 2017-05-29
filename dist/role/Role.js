@@ -17,8 +17,8 @@ var Role = function(creep, type = RoleType.UNDEFINED, states = [])
 {
   this.creep = creep;
   this.type = type;
-  this.states = states;
   this.activeState = new StateNone(this.creep, this);
+  this.states = states;
 
   // Each creep assigns its roles a base priority level which is used to
   // differentiate one role from another in terms of their importance.
