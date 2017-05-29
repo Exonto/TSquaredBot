@@ -1,8 +1,9 @@
 var State = require('State');
+var StateType = require('StateType');
 
 var StateTransfer = function(creep, role, target)
 {
-  State.call(this, StateType.TRANSFERING, creep, role);
+  State.call(this, StateType.TRANSFERRING, 'Transferring', creep, role);
 
   this.target = target;
 };

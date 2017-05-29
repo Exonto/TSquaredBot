@@ -1,8 +1,9 @@
 var State = require('State');
+var StateType = require('StateType');
 
 var StateMove = function(creep, role, target)
 {
-  State.call(this, StateType.MOVING, creep, role);
+  State.call(this, StateType.MOVING, 'Moving', creep, role);
 
   this.target = target;
 };

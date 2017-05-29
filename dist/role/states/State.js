@@ -1,3 +1,4 @@
+var StateType = require('StateType');
 
 /**
  * A state represents a game object's state of being.
@@ -9,13 +10,15 @@
  * between various states. This allows roles to act as the brain of a creep or
  * other game object which then dictate the creep's current state.
  * @param  {StateType} type  A state type is a simple way to identify one state
- *                           from another.
- * @param  {Creep} creep The creep to which this state belongs.
- * @param  {Role} role  The role to which this state belongs.
+ *                           from another
+ * @param {String} name Gives the state a name for logging purposes
+ * @param  {Creep} creep The creep to which this state belongs
+ * @param  {Role} role  The role to which this state belongs
  */
-var State = function(type, creep, role)
+var State = function(type, name, creep, role)
 {
   this.type = type;
+  this.name = name;
   this.creep = creep;
   this.role = role;
 };
@@ -33,5 +36,10 @@ State.prototype.isComplete = function() { };
  *                its default type
  */
 State.prototype.resolveType = function() { };
+
+State.prototype.toString = function()
+{
+  return '[Name: ' + this.name + ']';
+};
 
 module.exports = State;

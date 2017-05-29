@@ -13,13 +13,11 @@ module.exports.loop = function()
   for (var name in Game.creeps)
   {
     var creep = Game.creeps[name];
-    if (creep._initialized === false)
+    if (test === false)
     {
       creep.initialize(undefined, [new RoleHarvester(creep, Priority.PRIMARY)]);
     }
 
     creep.update();
   }
-
-  console.log(Game.cpu.getUsed());
 };

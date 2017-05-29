@@ -1,6 +1,9 @@
 var Role = require('Role');
 var RoleType = require('RoleType');
 var StateType = require('StateType');
+var StateHarvest = require('StateHarvest');
+var StateTransfer = require('StateTransfer');
+var StateMove = require('StateMove');
 var Priority = require('Priority');
 
 var RoleHarvester = function(creep, basePriority)
@@ -33,21 +36,21 @@ RoleHarvester.prototype.resolvePriority = function()
 RoleHarvester.prototype.resolveState = function()
 {
   var resolvedState = this.activeState;
-  if (this.activeState.isCompleted())
+  if (this.activeState.isComplete())
   {
     var stateType = this.activeState.type;
-    if (stateType === StateType.MOVING.RESOURCE)
+    if (stateType === StateType.MOVING && this.activeState.target instanceof Source)
     {
       resolvedState = new StateHarvest(this.creep, this, this.activeState.source);
     }
-    else if (stateType === StateType.BUILDING.STRUCTURE.SPAWN)
+    else if (stateType === StateType.MOVING && this.activeState.target instanceof Spawn)
     {
       resolvedState = new StateTransfer(this.creep, this, this.activeState.spawn);
     }
     else if (stateType === StateType.HARVESTING)
     {
       var resolvedSpawn = this.resolveSpawn();
-      resolvedState = new StateMove(this.creep, this, this.activeState, resolvedSpawn);
+      resolvedState = new StateMove(this.creep, this, resolvedSpawn);
     }
     else if (stateType === StateType.TRANSFERRING || stateType === StateType.NONE)
     {
@@ -86,7 +89,7 @@ RoleHarvester.prototype.resolveSpawn = function()
 
 RoleHarvester.prototype.execute = function(state = undefined)
 {
-  this.activeState = (state !== undefined) ? (this.resolveState()) : (state);
+  this.activeState = this.resolveState();
   this.activeState.execute();
 };
 

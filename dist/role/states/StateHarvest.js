@@ -1,8 +1,9 @@
 var State = require('State');
+var StateType = require('StateType');
 
 var StateHarvest = function(creep, role, target)
 {
-  State.call(this, StateType.HARVESTING, creep, role);
+  State.call(this, StateType.HARVESTING, 'Harvesting', creep, role);
 
   this.target = target;
 };

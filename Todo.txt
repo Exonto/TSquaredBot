@@ -1,2 +1,3 @@
 
 Ensure that all creeps and structures are ours and not an opponents.
+Active states may be completed even before they have been executed
