@@ -36,6 +36,8 @@ var Role = function(creep, type = RoleType.UNDEFINED, states = [])
  */
 Role.prototype.resolvePriority = function() { };
 
+Role.prototype.resolveState = function() { };
+
 Role.prototype.execute = function(state = undefined) { };
 
 Role.prototype.serialize = function()

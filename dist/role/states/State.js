@@ -15,12 +15,12 @@ var StateType = require('StateType');
  * @param  {Creep} creep The creep to which this state belongs
  * @param  {Role} role  The role to which this state belongs
  */
-var State = function(type, name, creep, role)
+var State = function(creep, role, type, name)
 {
-  this.type = type;
-  this.name = name;
   this.creep = creep;
   this.role = role;
+  this.type = type;
+  this.name = name;
 };
 
 State.prototype.execute = function() { };
@@ -36,6 +36,25 @@ State.prototype.isComplete = function() { };
  *                its default type
  */
 State.prototype.resolveType = function() { };
+
+State.prototype.serialize = function()
+{
+  var properties = [];
+  var idx = 0;
+
+  properties[idx++] = this.type;
+
+  return properties;
+};
+
+State.prototype.deserialize = function(properties)
+{
+  var idx = 0;
+
+  this.type = properties[idx++];
+
+  return idx;
+};
 
 State.prototype.toString = function()
 {

@@ -3,7 +3,7 @@ var StateType = require('StateType');
 
 var StateHarvest = function(creep, role, target)
 {
-  State.call(this, StateType.HARVESTING, 'Harvesting', creep, role);
+  State.call(this, creep, role, StateType.HARVESTING, 'Harvesting');
 
   this.target = target;
 };
@@ -27,6 +27,19 @@ StateHarvest.prototype.isComplete = function()
 StateHarvest.prototype.resolveType = function()
 {
 
+};
+
+StateHarvest.prototype.serialize = function()
+{
+  var properties = State.prototype.serialize.call(this);
+  var idx = properties.length;
+
+  return properties;
+};
+
+StateHarvest.prototype.deserialize = function(properties)
+{
+  var idx = Role.prototype.deserialize.call(this, properties);
 };
 
 module.exports = StateHarvest;

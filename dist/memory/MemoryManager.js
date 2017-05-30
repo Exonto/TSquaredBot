@@ -1,4 +1,5 @@
 var RoleTypeBinding = require('RoleTypeBinding');
+var StateTypeBinding = require('StateTypeBinding');
 var RoleHarvester = require('RoleHarvester');
 var Priority = require('Priority');
 
@@ -10,12 +11,21 @@ var MemoryManager = function() { };
  */
 MemoryManager.saveCreep = function(creep)
 {
+  // Roles
+
   creep.memory.ActiveRole =
   {
     'Properties' : creep.activeRole.serialize()
   };
 
-  creep.memory.AvailableRoles = _serializeAvailableRoles();
+  creep.memory.AvailableRoles = MemoryManager._serializeAvailableRoles(creep);
+
+  // States
+  console.log('Serializing: ' + creep.activeRole.activeState)
+  creep.memory.ActiveRole.ActiveState =
+  {
+    'Properties' : creep.activeRole.activeState.serialize()
+  };
 };
 
 /**
@@ -25,10 +35,17 @@ MemoryManager.saveCreep = function(creep)
  */
 MemoryManager.initializeCreep = function(creep)
 {
-  var properties = MemoryManager.getActiveRoleProperties(creep);
-  var roleType = properties[0];
+  var roleProperties = MemoryManager.getActiveRoleProperties(creep);
+  var roleType = roleProperties[0];
   var role = RoleTypeBinding[roleType](creep);
-  role.deserialize(properties);
+
+  var stateProperties = MemoryManager.getActiveStateProperties(creep);
+  var stateType = stateProperties[0];
+  var state = StateTypeBinding[stateType](creep);
+  state.deserialize(stateProperties);
+
+  role.activeState = state;
+  role.deserialize(roleProperties);
 
   var availableRoles = MemoryManager._deserializeAvailableRoles(creep);
 
@@ -91,6 +108,11 @@ MemoryManager.getActiveRoleProperties = function(creep)
 MemoryManager.getAvailableRoleProperties = function(creep, roleType)
 {
   return Memory.creeps[creep.name].AvailableRoles[roleType];
+};
+
+MemoryManager.getActiveStateProperties = function(creep)
+{
+  return Memory.creeps[creep.name].ActiveRole.ActiveState.Properties;
 };
 
 module.exports = MemoryManager;

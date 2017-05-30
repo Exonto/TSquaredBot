@@ -3,7 +3,7 @@ var StateType = require('StateType');
 
 var StateNone = function(creep, role)
 {
-  State.call(this, StateType.NONE, 'None', creep, role);
+  State.call(this, creep, role, StateType.NONE, 'None');
 };
 
 StateNone.prototype = Object.create(State.prototype);
