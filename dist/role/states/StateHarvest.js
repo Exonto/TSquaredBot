@@ -1,5 +1,6 @@
 var State = require('State');
 var StateType = require('StateType');
+var Serializer = require('Serializer');
 
 var StateHarvest = function(creep, role, target)
 {
@@ -34,12 +35,18 @@ StateHarvest.prototype.serialize = function()
   var properties = State.prototype.serialize.call(this);
   var idx = properties.length;
 
+  // Will always harvest something with an ID
+  properties[idx++] = Serializer.serializeObjectWithID(this.target);
+
   return properties;
 };
 
 StateHarvest.prototype.deserialize = function(properties)
 {
-  var idx = Role.prototype.deserialize.call(this, properties);
+  var idx = State.prototype.deserialize.call(this, properties);
+
+  var targetProperty = properties[idx++];
+  this.target = Serializer.deserializeObjectWithID(targetProperty);
 };
 
 module.exports = StateHarvest;

@@ -1,3 +1,11 @@
 
 Ensure that all creeps and structures are ours and not an opponents.
+
 Active states may be completed even before they have been executed
+
+Make sure that whenever a building is destroyed, creeps are able to
+compensate by switching their target. This may be a problem when memory
+returns a unique id to a building such as a spawn.
+
+When a creep's memory fails to be retrieved, delete that creep's memory
+so that it can start over, otherwise it will be stuck forever.

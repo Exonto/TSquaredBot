@@ -1,5 +1,6 @@
 var State = require('State');
 var StateType = require('StateType');
+var Serializer = require('Serializer');
 
 var StateMove = function(creep, role, target)
 {
@@ -37,6 +38,34 @@ StateMove.prototype.isComplete = function()
 StateMove.prototype.resolveType = function()
 {
 
+};
+
+StateMove.prototype.serialize = function()
+{
+  var properties = State.prototype.serialize.call(this);
+  var idx = properties.length;
+
+  if (Serializer.hasID(this.target))
+  {
+    properties[idx++] = Serializer.serializeObjectWithID(this.target);
+  }
+  else if (this.target instanceof RoomPosition)
+  {
+    // Not implemented
+  }
+
+  return properties;
+};
+
+StateMove.prototype.deserialize = function(properties)
+{
+  var idx = State.prototype.deserialize.call(this, properties);
+
+  var targetProperty = properties[idx++];
+  if (Serializer.isID(targetProperty))
+  {
+    this.target = Serializer.deserializeObjectWithID(targetProperty);
+  }
 };
 
 module.exports = StateMove;

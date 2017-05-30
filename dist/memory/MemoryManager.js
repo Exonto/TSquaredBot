@@ -21,7 +21,7 @@ MemoryManager.saveCreep = function(creep)
   creep.memory.AvailableRoles = MemoryManager._serializeAvailableRoles(creep);
 
   // States
-  console.log('Serializing: ' + creep.activeRole.activeState)
+  
   creep.memory.ActiveRole.ActiveState =
   {
     'Properties' : creep.activeRole.activeState.serialize()
@@ -97,7 +97,7 @@ MemoryManager._serializeAvailableRoles = function(creep)
 
 MemoryManager.creepExists = function(creep)
 {
-  return Memory.creeps[creep.name] !== undefined;
+  return Memory.creeps[creep.name].ActiveRole !== undefined;
 };
 
 MemoryManager.getActiveRoleProperties = function(creep)

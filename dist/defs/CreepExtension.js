@@ -20,8 +20,6 @@ Creep.prototype.initialize = function(colony, availableRoles, activeRole = undef
 {
   if (this._initialized) console.log('ERROR: Cannot initialize an already initialized creep.');
 
-  console.log('Active role: ' + activeRole);
-
   this.colony = colony;
   this.activeRole = activeRole;
   this.availableRoles = availableRoles;
@@ -44,11 +42,11 @@ Creep.prototype.update = function()
     return;
   }
 
-  this.activeRole = this.resolveDominantRole();
-  var state = this.activeRole.resolveState();
-  this.activeRole.activeState = state;
-  console.log('Resolved state: ' + state);
-  //this.activeRole.execute(this.activeRole.resolveState());
+  if (this.activeRole === undefined)
+  {
+    this.activeRole = this.resolveDominantRole();
+  }
+  this.activeRole.execute();
 
   return this.activeRole;
 };

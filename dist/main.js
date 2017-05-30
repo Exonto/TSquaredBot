@@ -23,7 +23,6 @@ module.exports.loop = function()
       else
       {
         creep.initialize(undefined, [new RoleHarvester(creep, Priority.PRIMARY)]);
-        console.log('First Init');
       }
 
       creep.update();

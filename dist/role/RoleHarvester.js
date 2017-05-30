@@ -41,11 +41,11 @@ RoleHarvester.prototype.resolveState = function()
     var stateType = this.activeState.type;
     if (stateType === StateType.MOVING && this.activeState.target instanceof Source)
     {
-      resolvedState = new StateHarvest(this.creep, this, this.activeState.source);
+      resolvedState = new StateHarvest(this.creep, this, this.activeState.target);
     }
-    else if (stateType === StateType.MOVING && this.activeState.target instanceof Spawn)
+    else if (stateType === StateType.MOVING && this.activeState.target instanceof StructureSpawn)
     {
-      resolvedState = new StateTransfer(this.creep, this, this.activeState.spawn);
+      resolvedState = new StateTransfer(this.creep, this, this.activeState.target);
     }
     else if (stateType === StateType.HARVESTING)
     {
@@ -64,27 +64,27 @@ RoleHarvester.prototype.resolveState = function()
 
 RoleHarvester.prototype.resolveSpawn = function()
 {
-  var dominantSpawn;
-  var dominantSpawnWeight;
+  // var dominantSpawn;
+  // var dominantSpawnWeight;
+  //
+  // var creepRoom = this.creep.room;
+  // var weight;
+  // var spawn;
+  // for (var spawnName in creepRoom.spawns)
+  // {
+  //   spawn = creepRoom.spawns[spawnName];
+  //   var distance = this.creep.getRangeTo(spawn);
+  //
+  //   weight = spawn.energy / (distance);
+  //
+  //   if (weight > dominantSpawnWeight)
+  //   {
+  //     dominantSpawn = spawn;
+  //     dominantSpawnWeight = weight;
+  //   }
+  // }
 
-  var creepRoom = this.creep.room;
-  var weight;
-  var spawn;
-  for (var spawnName in creepRoom.spawns)
-  {
-    spawn = creepRoom.spawns[spawnName];
-    var distance = this.creep.getRangeTo(spawn);
-
-    weight = spawn.energy / (distance);
-
-    if (weight > dominantSpawnWeight)
-    {
-      dominantSpawn = spawn;
-      dominantSpawnWeight = weight;
-    }
-  }
-
-  return spawn;
+  return Game.spawns['Spawn1'];
 };
 
 RoleHarvester.prototype.execute = function(state = undefined)
