@@ -21,7 +21,7 @@ MemoryManager.saveCreep = function(creep)
   creep.memory.AvailableRoles = MemoryManager._serializeAvailableRoles(creep);
 
   // States
-  
+
   creep.memory.ActiveRole.ActiveState =
   {
     'Properties' : creep.activeRole.activeState.serialize()
@@ -50,6 +50,16 @@ MemoryManager.initializeCreep = function(creep)
   var availableRoles = MemoryManager._deserializeAvailableRoles(creep);
 
   creep.initialize(undefined, availableRoles, role);
+};
+
+MemoryManager.saveRoomSources = function(room, energySourceIds)
+{
+  room.memory.EnergySources = energySourceIds;
+};
+
+MemoryManager.saveRoomMinerals = function(room, mineralSourceIds)
+{
+  room.memory.MineralSources = mineralSourceIds;
 };
 
 MemoryManager._deserializeAvailableRoles = function(creep)
