@@ -4,7 +4,7 @@ var Serializer = require('Serializer');
 
 var StateHarvest = function(creep, role, target)
 {
-  State.call(this, creep, role, StateType.HARVESTING, 'Harvesting');
+  State.call(this, creep, role, StateType.HARVESTING.GENERIC, 'Harvesting');
 
   this.target = target;
 };

@@ -4,7 +4,7 @@ var Serializer = require('Serializer');
 
 var StateMove = function(creep, role, target)
 {
-  State.call(this, creep, role, StateType.MOVING, 'Moving');
+  State.call(this, creep, role, StateType.MOVING.GENERIC, 'Moving');
 
   this.target = target;
 };
