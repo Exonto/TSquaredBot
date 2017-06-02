@@ -28,7 +28,7 @@ Serializer.serializeRoomPos = function(pos)
   return pos.x + ' ' + pos.y ;
 };
 
-Serializer.serializeRoomPositions = function(association, positions)
+Serializer.serializeRoomPositions = function(positions)
 {
   var posSerializedArr = [];
 

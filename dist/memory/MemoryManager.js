@@ -70,7 +70,10 @@ MemoryManager.saveRoomSources = function(room, energySourceIds)
 MemoryManager.saveRoomSourceFaces = function(room, energySourceId, energySourceFaces)
 {
   console.log('Saving to: ' + JSON.stringify(Serializer.serializeRoomPositions(energySourceId, energySourceFaces)));
-  Memory.rooms[room.name].EnergySources[energySourceId] =  { 'OpenFaces' : Serializer.serializeRoomPositions('OpenFace', energySourceFaces) }
+  Memory.rooms[room.name].EnergySources[energySourceId] =
+    {
+      'OpenFaces' : Serializer.serializeRoomPositions(energySourceFaces)
+    };
 };
 
 MemoryManager.saveRoomMinerals = function(room, mineralSourceIds)
