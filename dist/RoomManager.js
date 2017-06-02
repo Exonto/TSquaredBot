@@ -1,48 +1,75 @@
+var MemoryManager = require('MemoryManager');
 
-/**
- * Room manager constructor.
- */
-var RoomManage = function()
+var RoomManager = function() { };
+
+RoomManager.analyse = function(room, phase)
 {
-  this.allRooms = [];
-  this.ownedRooms = [];
-  this.unownedRooms = [];
-}
-
-/**
- * Resets all previous data being stored.
- */
-RoomManager.prototype._reset = function()
-{
-  this.allRooms.length = 0;
-  this.ownedRooms.length = 0;
-  this.unownedRooms.length = 0;
-};
-
-/**
- * This will update all room data and cache it.
- * @param  {object<string,Rooms>} rooms The rooms to be considered in the update.
- */
-RoomManager.prototype.update = function(rooms)
-{
-  // Reset all previous data now being updated
-  this._reset();
-
-  // Loops through every room name hash key
-  for (var roomName in rooms)
+  if (phase === 1)
   {
-    var room = rooms[roomName];
-    this.allRooms.push(room);
+    var energySources = room.find(FIND_SOURCES);
+    var mineralSources = room.find(FIND_MINERALS);
 
-    if (room.controller.my)
+    var energySourceIds = [];
+    for (let energySourceIdx in energySources)
     {
-      this.ownedRooms.push(room);
+      energySourceIds.push(energySources[energySourceIdx].id);
     }
-    else
+
+    var mineralSourceIds = [];
+    for (let mineralSourceIdx in mineralSources)
     {
-      this.unownedRooms.push(room);
+      mineralSourceIds.push(mineralSources[mineralSourceIdx].id);
+    }
+
+    MemoryManager.saveRoomSources(room, energySourceIds);
+    MemoryManager.saveRoomMinerals(room, mineralSourceIds);
+  }
+  else if (phase === 2)
+  {
+    let energySources = room.find(FIND_SOURCES);
+    let mineralSources = room.find(FIND_MINERALS);
+
+    for (let energySourceIdx in energySources)
+    {
+      var energySource = energySources[energySourceIdx];
+      MemoryManager.saveRoomSourceFaces(room, energySource.id, RoomManager.getOpenFaces(room, energySource.pos));
+    }
+
+    for (let mineralSourceIdx in mineralSources)
+    {
+      var mineralSource = mineralSources[mineralSourceIdx];
+      MemoryManager.saveRoomMineralFaces(room, mineralSource.id, RoomManager.getOpenFaces(room, mineralSource.pos));
     }
   }
+};
+
+RoomManager.getOpenFaces = function(room, pos)
+{
+  var openFaces = [];
+
+  var adjacents = [];
+  adjacents[0] = new RoomPosition(pos.x - 1, pos.y + 1, room.name);
+  adjacents[1] = new RoomPosition(pos.x, pos.y + 1, room.name);
+  adjacents[2] = new RoomPosition(pos.x + 1, pos.y + 1, room.name);
+  adjacents[3] = new RoomPosition(pos.x + 1, pos.y, room.name);
+  adjacents[4] = new RoomPosition(pos.x + 1, pos.y - 1, room.name);
+  adjacents[5] = new RoomPosition(pos.x, pos.y - 1, room.name);
+  adjacents[6] = new RoomPosition(pos.x - 1, pos.y - 1, room.name);
+  adjacents[7] = new RoomPosition(pos.x - 1, pos.y, room.name);
+
+  for (var adjacentIdx in adjacents)
+  {
+    var adjacent = adjacents[adjacentIdx];
+    var terrainAt = Game.map.getTerrainAt(adjacent);
+    if (terrainAt === 'plain' || terrainAt === 'swamp')
+    {
+      openFaces.push(adjacent);
+    }
+  }
+
+  console.log(openFaces.length);
+
+  return openFaces;
 };
 
 module.exports = RoomManager;

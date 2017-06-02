@@ -2,6 +2,7 @@ var RoleTypeBinding = require('RoleTypeBinding');
 var StateTypeBinding = require('StateTypeBinding');
 var RoleHarvester = require('RoleHarvester');
 var Priority = require('Priority');
+var Serializer = require('Serializer');
 
 var MemoryManager = function() { };
 
@@ -52,14 +53,35 @@ MemoryManager.initializeCreep = function(creep)
   creep.initialize(undefined, availableRoles, role);
 };
 
+MemoryManager._ensureRoomMemory = function(room)
+{
+  if (Memory.rooms[room.name] === undefined)
+  {
+    Memory.rooms[room.name] = { };
+  }
+};
+
 MemoryManager.saveRoomSources = function(room, energySourceIds)
 {
-  room.memory.EnergySources = energySourceIds;
+  MemoryManager._ensureRoomMemory(room);
+  Memory.rooms[room.name].EnergySources = { energySourceIds };
+};
+
+MemoryManager.saveRoomSourceFaces = function(room, energySourceId, energySourceFaces)
+{
+  console.log('Saving to: ' + JSON.stringify(Serializer.serializeRoomPositions(energySourceId, energySourceFaces)));
+  Memory.rooms[room.name].EnergySources[energySourceId] =  { 'OpenFaces' : Serializer.serializeRoomPositions('OpenFace', energySourceFaces) }
 };
 
 MemoryManager.saveRoomMinerals = function(room, mineralSourceIds)
 {
-  room.memory.MineralSources = mineralSourceIds;
+  MemoryManager._ensureRoomMemory(room);
+  Memory.rooms[room.name].MineralSources = mineralSourceIds;
+};
+
+MemoryManager.saveRoomMineralFaces = function(room, mineralSourceId, mineralSourceFaces)
+{
+  //Memory.rooms[room.name].MineralSources[mineralSourceId] = mineralSourceFaces;
 };
 
 MemoryManager._deserializeAvailableRoles = function(creep)

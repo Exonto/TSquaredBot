@@ -9,3 +9,9 @@ returns a unique id to a building such as a spawn.
 
 When a creep's memory fails to be retrieved, delete that creep's memory
 so that it can start over, otherwise it will be stuck forever.
+
+Energy sources and such may not be accessibly due to pathing.
+Ensure that it can be travelled to to avoid errors.
+Do not build anything on a cached path.
+
+Use an object id retriever for lazy getting of objects by id.

@@ -4,6 +4,7 @@ var RoleHarvester = require('RoleHarvester');
 var CreepExtension = require('CreepExtension');
 var Priority = require('Priority');
 var MemoryManager = require('MemoryManager');
+var RoomManager = require('RoomManager');
 
 if (Game.creeps.length === 0)
 {
@@ -11,23 +12,29 @@ if (Game.creeps.length === 0)
 }
 module.exports.loop = function()
 {
-  for (var name in Game.creeps)
-  {
-    var creep = Game.creeps[name];
-    if (creep.spawning === false)
-    {
-      if (MemoryManager.creepExists(creep))
-      {
-        MemoryManager.initializeCreep(creep);
-      }
-      else
-      {
-        creep.initialize(undefined, [new RoleHarvester(creep, Priority.PRIMARY)]);
-      }
+  // for (var name in Game.creeps)
+  // {
+  //   var creep = Game.creeps[name];
+  //   if (creep.spawning === false)
+  //   {
+  //     if (MemoryManager.creepExists(creep))
+  //     {
+  //       MemoryManager.initializeCreep(creep);
+  //     }
+  //     else
+  //     {
+  //       creep.initialize(undefined, [new RoleHarvester(creep, Priority.PRIMARY)]);
+  //     }
+  //
+  //     creep.update();
+  //
+  //     MemoryManager.saveCreep(creep);
+  //   }
+  // }
+  var room = Game.spawns.Spawn1.room;
 
-      creep.update();
+  RoomManager.analyse(room, 1);
+  RoomManager.analyse(room, 2);
 
-      MemoryManager.saveCreep(creep);
-    }
-  }
+  console.log(room);
 };

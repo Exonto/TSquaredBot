@@ -23,4 +23,21 @@ Serializer.isID = function(keyPair)
   return Object.keys(keyPair)[0] === 'id';
 };
 
+Serializer.serializeRoomPos = function(pos)
+{
+  return pos.x + ' ' + pos.y ;
+};
+
+Serializer.serializeRoomPositions = function(association, positions)
+{
+  var posSerializedArr = [];
+
+  for (var posIdx in positions)
+  {
+    posSerializedArr.push(Serializer.serializeRoomPos(positions[posIdx]));
+  }
+
+  return posSerializedArr;
+};
+
 module.exports = Serializer;
